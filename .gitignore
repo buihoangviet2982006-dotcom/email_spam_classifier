@@ -91,4 +91,5 @@ target/
 
 # Other
 .vscode/
+.venv/
 *.csv

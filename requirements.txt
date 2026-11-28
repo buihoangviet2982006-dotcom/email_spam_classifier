@@ -1,7 +1,23 @@
-# This file may be used to create an environment using:
-# $ conda create --name <env> --file <this file>
-matplotlib
+# Core ML & Data Science
 numpy
 pandas
-pyyaml
 scikit-learn
+matplotlib
+seaborn
+pyyaml
+joblib
+
+# Jupyter & Notebook execution
+ipykernel
+nbconvert
+nbclient
+ipywidgets
+
+# REST API & Demo
+fastapi
+uvicorn[standard]
+pydantic
+
+# Testing
+pytest
+httpx
