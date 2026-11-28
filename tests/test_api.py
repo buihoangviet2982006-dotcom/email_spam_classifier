@@ -24,7 +24,7 @@ def test_model_info_endpoint():
         assert resp.status_code == 200
         data = resp.json()
         assert data["best_model_name"]
-        assert len(data["comparison"]) == 3
+        assert len(data["comparison"]) == 5
         assert data["comparison"][0]["is_best"] is True
 
 

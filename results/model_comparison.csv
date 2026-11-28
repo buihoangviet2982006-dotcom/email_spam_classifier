@@ -1,0 +1,6 @@
+﻿key,model_name,model_file,accuracy,precision_spam,recall_spam,f1_spam,roc_auc,tn,fp,fn,tp,errors,inference_ms_per_1000,eval_time_s,model_size_mb,rank,is_best
+logistic_regression,Logistic Regression,logistic_regression_spam_pipeline.pkl,0.989574,0.985289,0.995086,0.990163,0.998394,7713,130,43,8707,173,184.28,5.55,0.913,1,True
+svm,SVM (LinearSVC + Calibrated),svm_spam_pipeline.pkl,0.989393,0.986165,0.993829,0.989982,0.998164,7721,122,54,8696,176,162.22,5.96,1.22,2,False
+naive_bayes,Multinomial Naive Bayes,naive_bayes.pkl,0.969144,0.979734,0.961371,0.970466,0.994972,7669,174,338,8412,512,103.74,3.74,0.655,3,False
+decision_tree,Decision Tree,decision_tree.pkl,0.950823,0.926926,0.984343,0.954772,0.957087,7164,679,137,8613,816,104.21,3.72,0.396,4,False
+random_forest,Random Forest,random_forest.pkl,0.937745,0.898071,0.994857,0.94399,0.992073,6855,988,45,8705,1033,280.03,3.91,6.893,5,False

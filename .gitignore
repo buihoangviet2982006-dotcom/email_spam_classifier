@@ -92,4 +92,5 @@ target/
 # Other
 .vscode/
 .venv/
-*.csv
+data/raw/*.csv
+data/processed/*.csv

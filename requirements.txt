@@ -6,6 +6,7 @@ matplotlib
 seaborn
 pyyaml
 joblib
+kagglehub
 
 # Jupyter & Notebook execution
 ipykernel

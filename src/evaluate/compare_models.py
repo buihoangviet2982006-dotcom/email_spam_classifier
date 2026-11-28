@@ -46,6 +46,16 @@ MODEL_SPECS = [
         "name": "SVM (LinearSVC + Calibrated)",
         "filename": "svm_spam_pipeline.pkl",
     },
+    {
+        "key": "naive_bayes",
+        "name": "Multinomial Naive Bayes",
+        "filename": "naive_bayes.pkl",
+    },
+    {
+        "key": "random_forest",
+        "name": "Random Forest",
+        "filename": "random_forest.pkl",
+    },
 ]
 
 
@@ -184,18 +194,23 @@ def plot_comparison(
     roc_curves: dict[str, tuple[np.ndarray, np.ndarray, float]],
     out_path: Path,
 ) -> None:
-    fig, axes = plt.subplots(1, 2, figsize=(15, 5.5))
+    fig, axes = plt.subplots(1, 2, figsize=(16, 5.8))
 
     metrics = ["accuracy", "precision_spam", "recall_spam", "f1_spam", "roc_auc"]
     metric_labels = ["Accuracy", "Precision", "Recall", "F1-Score", "ROC-AUC"]
     x = np.arange(len(metrics))
-    width = 0.25
-    colors = ["#2563eb", "#16a34a", "#f97316"]
+    n_models = len(df)
+    width = 0.78 / max(n_models, 1)
+    colors = ["#2563eb", "#16a34a", "#f97316", "#a855f7", "#eab308"]
+
+    min_pct = float(df[metrics].min().min() * 100)
+    y_bottom = max(0.0, min(90.0, np.floor(min_pct / 5.0) * 5.0 - 2.0))
 
     for i, (_, row) in enumerate(df.iterrows()):
         vals = [row[m] * 100 for m in metrics]
+        offset = (i - (n_models - 1) / 2.0) * width
         bars = axes[0].bar(
-            x + (i - 1) * width,
+            x + offset,
             vals,
             width,
             label=row["model_name"],
@@ -204,20 +219,20 @@ def plot_comparison(
         for bar, val in zip(bars, vals):
             axes[0].text(
                 bar.get_x() + bar.get_width() / 2,
-                val + 0.25,
+                val + 0.3,
                 f"{val:.2f}%",
                 ha="center",
                 va="bottom",
-                fontsize=7.5,
+                fontsize=7,
                 rotation=90,
             )
 
-    axes[0].set_ylim(90, 102)
+    axes[0].set_ylim(y_bottom, 104)
     axes[0].set_xticks(x)
     axes[0].set_xticklabels(metric_labels)
     axes[0].set_ylabel("Score (%)")
     axes[0].set_title("So sánh hiệu năng các thuật toán trên tập Test")
-    axes[0].legend(loc="lower right")
+    axes[0].legend(loc="lower right", fontsize=8.5)
     axes[0].grid(axis="y", linestyle="--", alpha=0.5)
 
     for i, (name, (fpr, tpr, auc)) in enumerate(roc_curves.items()):
